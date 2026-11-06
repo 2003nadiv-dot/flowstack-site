@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flow Stack | Does AI search name your company?</title>
+<meta name="description" content="Flow Stack asks AI search the 30 questions your buyers ask and shows software companies serving commercial real estate where they are named, who is named instead, and which pages to fix.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+@font-face{
+  font-family:"Geist";
+  src:url("geist-latin-wght-normal.woff2") format("woff2"),
+      url("fonts/geist-latin-wght-normal.woff2") format("woff2");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+
+:root{
+  --ink:#0f1013;
+  --ink-2:#1b1d23;
+  --ink-line:#2c2f37;
+  --ink-soft:#a9acb3;
+  --paper:#f3f2ee;
+  --mist:#e8e7e2;
+  --flame:#ff5a2d;
+  --flame-text:#b83410;
+  --slate:#5a5d65;
+  --gutter:20px;
+  --max:1120px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Geist",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:1.0625rem;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:650;letter-spacing:-0.03em;line-height:1.08}
+
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:4px;z-index:10}
+.skip:focus{left:8px}
+
+:focus-visible{outline:3px solid var(--flame);outline-offset:3px;border-radius:2px}
+
+/* logo */
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.logo svg{width:28px;height:auto;flex:none}
+.logo span{font-weight:700;font-size:1.375rem;letter-spacing:-0.035em;line-height:1}
+
+/* header */
+.top{padding:22px 0}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.top nav a{font-weight:550;text-decoration:none;padding:10px 0;border-bottom:2px solid var(--ink)}
+.top nav a:hover{border-bottom-color:var(--flame)}
+
+/* buttons and links */
+.btn{
+  display:inline-block;
+  background:var(--flame);
+  color:var(--ink);
+  font-weight:650;
+  text-decoration:none;
+  padding:15px 24px;
+  border-radius:4px;
+  letter-spacing:-0.01em;
+  transition:background-color .15s ease;
+}
+.btn:hover{background:#ff7448}
+.textlink{font-weight:550;color:var(--flame-text);text-underline-offset:4px}
+
+/* hero */
+.hero{padding:40px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1fr;gap:48px}
+.hero h1{font-size:clamp(2.5rem,7.2vw,4.75rem);line-height:1.0;letter-spacing:-0.045em;max-width:13em}
+.hero .lead{margin-top:28px;font-size:1.25rem;line-height:1.55;max-width:34em;color:var(--ink)}
+.actions{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+
+.panel{background:var(--ink);color:var(--paper);border-radius:6px;padding:28px 24px 24px}
+.panel h2{font-size:1.125rem;letter-spacing:-0.02em;font-weight:600;color:var(--paper)}
+.stacks{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+.stack{display:flex;flex-direction:column;gap:3px}
+.stack i{display:block;height:6px;background:var(--ink-line);border-radius:1px}
+.stack i.on{background:var(--flame)}
+.stat{margin-top:14px;font-size:1rem;line-height:1.35;color:var(--paper)}
+.stat b{display:block;font-size:2.25rem;line-height:1;letter-spacing:-0.04em;font-weight:700;margin-bottom:6px}
+.panel .note{margin-top:22px;font-size:.9375rem;line-height:1.5;color:var(--ink-soft)}
+
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.stack i{transform-origin:left center;animation:grow .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 26ms + 150ms)}
+
+/* sections */
+section{padding:84px 0}
+section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
+.sub{margin-top:18px;max-width:36em;font-size:1.1875rem}
+
+/* how it works */
+.how{background:var(--ink);color:var(--paper)}
+.how .cols{margin-top:48px;display:grid;grid-template-columns:1fr;gap:40px}
+.how h3{font-size:1.5rem;letter-spacing:-0.03em}
+.how p{margin-top:12px;color:var(--ink-soft);max-width:26em}
+.how .bar{display:block;width:28px;height:5px;background:var(--flame);border-radius:1px;margin-bottom:18px}
+
+/* what you get */
+.get .cols{margin-top:48px;display:grid;grid-template-columns:1fr;gap:56px}
+.get h3{font-size:1.75rem;letter-spacing:-0.035em}
+.get .what{margin-top:10px;color:var(--slate);max-width:28em}
+.get ul{margin:22px 0 0;padding:0;list-style:none;max-width:32em}
+.get li{position:relative;padding:12px 0 12px 22px;border-top:1px solid #d3d1ca}
+.get li:last-child{border-bottom:1px solid #d3d1ca}
+.get li::before{content:"";position:absolute;left:0;top:1.28em;width:10px;height:4px;background:var(--flame);border-radius:1px}
+.get .foot{margin-top:40px;color:var(--slate);max-width:36em}
+
+/* promise */
+.promise{background:var(--mist)}
+.promise .inner{max-width:44em;border-left:6px solid var(--flame);padding-left:24px}
+.promise .big{margin-top:22px;font-size:clamp(1.3rem,2.8vw,1.75rem);line-height:1.4;letter-spacing:-0.02em;font-weight:500}
+.promise .scope{margin-top:26px;color:var(--slate);max-width:36em}
+
+/* contact + footer */
+.contact{background:var(--ink);color:var(--paper);padding-bottom:56px}
+.contact .sub{color:var(--ink-soft)}
+.contact .actions{margin-top:32px}
+.contact .who{margin-top:44px;color:var(--ink-soft)}
+.foot-bar{background:var(--ink);color:var(--ink-soft);padding:0 0 44px}
+.foot-in{border-top:1px solid var(--ink-line);padding-top:32px;display:flex;flex-direction:column;gap:18px}
+.foot-bar .logo{color:var(--paper)}
+.foot-bar address{font-style:normal;font-size:.9375rem;line-height:1.55}
+
+@media (min-width:760px){
+  :root{--gutter:32px}
+  .hero{padding:56px 0 96px}
+  .hero .wrap{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:64px;align-items:center}
+  .panel{padding:32px 30px 28px}
+  .how .cols{grid-template-columns:repeat(3,1fr);gap:48px}
+  .get .cols{grid-template-columns:1fr 1fr;gap:72px}
+  section{padding:112px 0}
+  .foot-in{flex-direction:row;justify-content:space-between;align-items:flex-start}
+  .get .what{min-height:3.2em}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .stack i{animation:none}
+  html{scroll-behavior:auto}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="mark" viewBox="0 0 23 20">
+    <rect x="6.2" y="0" width="16.8" height="4.6" rx="0.9" fill="#ff5a2d"/>
+    <rect x="0" y="7.6" width="23" height="4.8" rx="0.9" fill="currentColor"/>
+    <rect x="0" y="15.4" width="15.6" height="4.6" rx="0.9" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./" aria-label="Flow Stack, home">
+      <svg viewBox="0 0 23 20" role="img" aria-hidden="true"><use href="#mark"/></svg>
+      <span>Flow Stack</span>
+    </a>
+    <nav aria-label="Main"><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<main id="main">
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>When a buyer asks AI who to choose, does it name you?</h1>
+      <p class="lead">I put the 30 questions your buyers ask to AI search and show you where you are named, who gets named instead, and which pages to fix. I work with software companies that serve commercial real estate.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:nadiv@flowstackautomations.com?subject=Free%20sample%20check">Ask for a free sample</a>
+        <a class="textlink" href="#what-you-get">See what you get</a>
+      </div>
+    </div>
+
+    <aside class="panel" aria-labelledby="ex-title">
+      <h2 id="ex-title">One real audit: a commercial real estate software vendor</h2>
+      <div class="stacks">
+        <div>
+          <div class="stack" aria-hidden="true"><i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="on" style="--i:8"></i><i class="on" style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i></div>
+          <p class="stat"><b>10 of 30</b>questions where the AI named the company</p>
+        </div>
+        <div>
+          <div class="stack" aria-hidden="true"><i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="on" style="--i:8"></i><i class="on" style="--i:9"></i><i class="on" style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i></div>
+          <p class="stat"><b>11 of 30</b>questions where the AI linked to its own website</p>
+        </div>
+      </div>
+      <p class="note">Each bar is one of the 30 questions. Company name removed.</p>
+    </aside>
+  </div>
+</div>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <div class="cols">
+      <div>
+        <span class="bar" aria-hidden="true"></span>
+        <h3>Ask</h3>
+        <p>I put your buyers' 30 questions to OpenAI's search, the way a buyer would. Each question is asked more than once, because AI answers change from one run to the next.</p>
+      </div>
+      <div>
+        <span class="bar" aria-hidden="true"></span>
+        <h3>Find the gaps</h3>
+        <p>For every question: were you named, who was named instead, and which sites were cited. The questions where you are missing show where to start.</p>
+      </div>
+      <div>
+        <span class="bar" aria-hidden="true"></span>
+        <h3>Fix the pages</h3>
+        <p>You get answer-page briefs your team can publish, a checklist for your developer, and notes on the outside sites the AI trusts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="get" id="what-you-get">
+  <div class="wrap">
+    <h2>What you get in the pilot</h2>
+    <div class="cols">
+      <div>
+        <h3>Baseline report</h3>
+        <p class="what">A PDF of about 4 pages.</p>
+        <ul>
+          <li>All 30 questions: named or not</li>
+          <li>Who gets named instead of you</li>
+          <li>Which sites the AI cites: yours, your competitors' and others</li>
+          <li>Where to start, in order</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Action pack</h3>
+        <p class="what">Up to 8 of the questions where you are missing, chosen with you.</p>
+        <ul>
+          <li>An answer-page brief for each, written for your team to publish</li>
+          <li>A developer checklist, once</li>
+          <li>Notes on the outside sites the AI cites</li>
+          <li>Steps to improve your review profiles</li>
+          <li>Outreach drafts, only where a suitable outside site was cited</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot">Delivered as Word files, or Google Docs if you prefer.</p>
+  </div>
+</section>
+
+<section class="promise" id="promise">
+  <div class="wrap">
+    <div class="inner">
+      <h2>What I can and can't promise</h2>
+      <p class="big">The goal is to get you cited by AI search. I can't control what the AI says, so I don't promise it. What I do is find exactly why you are missing and give you the pages and fixes that give you the best chance.</p>
+      <p class="scope">What I measure is OpenAI's search. That is not the ChatGPT app, Google's AI Overviews or other engines, which can answer differently.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Want to see where you stand?</h2>
+    <p class="sub">Send me your company's name and website. I'll run a free sample and email you what I find.</p>
+    <div class="actions">
+      <a class="btn" href="mailto:nadiv@flowstackautomations.com?subject=Free%20sample%20check">Email nadiv@flowstackautomations.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot-bar">
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="logo" href="./" aria-label="Flow Stack, home">
+        <svg viewBox="0 0 23 20" role="img" aria-hidden="true"><use href="#mark"/></svg>
+        <span>Flow Stack</span>
+      </a>
+      <address>
+        Flowstack Automations
+        <!-- TODO: add the postal address here, on a new line after a <br>, once the virtual mailbox is set up -->
+      </address>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
