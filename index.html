@@ -86,18 +86,23 @@ h1,h2,h3{margin:0;font-weight:650;letter-spacing:-0.03em;line-height:1.08}
 .hero .lead{margin-top:28px;font-size:1.25rem;line-height:1.55;max-width:34em;color:var(--ink)}
 .actions{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
 
-.panel{background:var(--ink);color:var(--paper);border-radius:6px;padding:28px 24px 24px}
-.panel h2{font-size:1.125rem;letter-spacing:-0.02em;font-weight:600;color:var(--paper)}
-.stacks{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
-.stack{display:flex;flex-direction:column;gap:3px}
-.stack i{display:block;height:6px;background:var(--ink-line);border-radius:1px}
-.stack i.on{background:var(--flame)}
-.stat{margin-top:14px;font-size:1rem;line-height:1.35;color:var(--paper)}
-.stat b{display:block;font-size:2.25rem;line-height:1;letter-spacing:-0.04em;font-weight:700;margin-bottom:6px}
-.panel .note{margin-top:22px;font-size:.9375rem;line-height:1.5;color:var(--ink-soft)}
-
-@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.stack i{transform-origin:left center;animation:grow .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 26ms + 150ms)}
+.panel{background:var(--ink);color:var(--paper);border-radius:6px;padding:28px 26px 26px}
+.panel .kicker{margin:0;font-size:.9375rem;color:var(--ink-soft)}
+.panel h2{margin-top:6px;font-size:1.25rem;font-weight:600;letter-spacing:-0.025em;line-height:1.2;color:var(--paper)}
+.meter{margin-top:28px}
+.meter-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.meter-label{font-size:.9375rem;color:var(--ink-soft)}
+.meter-val{font-size:1.875rem;font-weight:700;letter-spacing:-0.04em;line-height:1;color:var(--paper);white-space:nowrap}
+.meter-val small{font-size:.9375rem;font-weight:500;letter-spacing:0;color:var(--ink-soft);margin-left:6px}
+.cells{margin-top:12px;display:grid;grid-template-columns:repeat(30,1fr);gap:2px;height:34px}
+.cells i{display:block;background:var(--ink-line);border-radius:1px;transform-origin:bottom center;animation:rise .45s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i) * 22ms + 150ms)}
+.cells i.on{background:var(--flame)}
+@keyframes rise{from{transform:scaleY(.15);opacity:0}to{transform:scaleY(1);opacity:1}}
+.legend{margin-top:24px;display:flex;gap:20px;font-size:.875rem;color:var(--ink-soft)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:1px;background:var(--ink-line)}
+.legend i.on{background:var(--flame)}
+.panel .note{margin-top:16px;padding-top:16px;border-top:1px solid var(--ink-line);font-size:.875rem;line-height:1.5;color:var(--ink-soft)}
 
 /* sections */
 section{padding:84px 0}
@@ -106,10 +111,15 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
 
 /* how it works */
 .how{background:var(--ink);color:var(--paper)}
-.how .cols{margin-top:48px;display:grid;grid-template-columns:1fr;gap:40px}
-.how h3{font-size:1.5rem;letter-spacing:-0.03em}
-.how p{margin-top:12px;color:var(--ink-soft);max-width:26em}
-.how .bar{display:block;width:28px;height:5px;background:var(--flame);border-radius:1px;margin-bottom:18px}
+.how .sub{color:var(--ink-soft)}
+.stages{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:1fr}
+.stages li{position:relative;margin-left:15px;padding:0 0 44px 48px;border-left:1px solid var(--ink-line)}
+.stages li:last-child{padding-bottom:0;border-left-color:transparent}
+.stages .n{position:absolute;left:-16px;top:-3px;width:31px;height:31px;border-radius:50%;background:var(--ink);border:1.5px solid var(--flame);color:var(--paper);font-weight:650;font-size:.9375rem;line-height:1;display:grid;place-items:center}
+.stages h3{font-size:1.375rem;letter-spacing:-0.03em}
+.stages p{margin-top:10px;color:var(--ink-soft);max-width:32em}
+.stages .out{margin-top:14px;font-size:.9375rem;line-height:1.45;color:var(--paper)}
+.stages .out b{display:block;font-weight:600;color:var(--flame);margin-bottom:2px}
 
 /* what you get */
 .get .cols{margin-top:48px;display:grid;grid-template-columns:1fr;gap:56px}
@@ -125,12 +135,60 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
 .promise{background:var(--mist)}
 .promise .inner{max-width:44em;border-left:6px solid var(--flame);padding-left:24px}
 .promise .big{margin-top:22px;font-size:clamp(1.3rem,2.8vw,1.75rem);line-height:1.4;letter-spacing:-0.02em;font-weight:500}
-.promise .scope{margin-top:26px;color:var(--slate);max-width:36em}
+.promise .mid{margin-top:24px;font-size:1.1875rem;line-height:1.55;max-width:36em}
+
+/* why it matters */
+.why{background:var(--mist)}
+.why .figs{margin-top:48px;display:grid;grid-template-columns:1fr;gap:36px}
+.fig-n{font-size:clamp(3.5rem,10vw,5rem);font-weight:700;letter-spacing:-0.055em;line-height:.95}
+.fig-t{margin-top:12px;max-width:19em;font-size:1.0625rem;line-height:1.5}
+.why .opening{margin-top:48px;max-width:36em;font-size:1.25rem;line-height:1.5;font-weight:550;letter-spacing:-0.015em}
+.why .defs{margin-top:44px;display:grid;grid-template-columns:1fr;gap:28px;max-width:52em}
+.why .defs h3{font-size:1.375rem;letter-spacing:-0.03em}
+.why .defs p{margin-top:8px;color:var(--slate);max-width:26em}
+.why .src{margin-top:52px;max-width:52em;font-size:.9375rem;line-height:1.55;color:var(--slate)}
+.why .src a{color:var(--flame-text);text-underline-offset:3px}
+
+/* faq */
+.faq-list{margin-top:40px;max-width:46em}
+.faq details{border-top:1px solid #d3d1ca}
+.faq details:last-child{border-bottom:1px solid #d3d1ca}
+.faq summary{
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:20px 0;
+  font-weight:600;
+  font-size:1.1875rem;
+  letter-spacing:-0.02em;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;font-size:1.625rem;font-weight:500;line-height:1;color:var(--flame-text)}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 0 22px;max-width:38em;color:var(--slate)}
 
 /* contact + footer */
 .contact{background:var(--ink);color:var(--paper);padding-bottom:56px}
 .contact .sub{color:var(--ink-soft)}
 .contact .actions{margin-top:32px}
+.contact .actions{align-items:center;gap:14px}
+.btn-ghost{
+  font:inherit;
+  font-weight:600;
+  letter-spacing:-0.01em;
+  color:var(--paper);
+  background:transparent;
+  border:1.5px solid #4a4d56;
+  border-radius:4px;
+  padding:13px 22px;
+  cursor:pointer;
+  transition:border-color .15s ease,background-color .15s ease;
+}
+.btn-ghost:hover{border-color:var(--paper)}
+.btn-ghost[hidden]{display:none}
 .contact .who{margin-top:44px;color:var(--ink-soft)}
 .foot-bar{background:var(--ink);color:var(--ink-soft);padding:0 0 44px}
 .foot-in{border-top:1px solid var(--ink-line);padding-top:32px;display:flex;flex-direction:column;gap:18px}
@@ -141,18 +199,24 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
   :root{--gutter:32px}
   .hero{padding:56px 0 96px}
   .hero .wrap{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:64px;align-items:center}
-  .panel{padding:32px 30px 28px}
-  .how .cols{grid-template-columns:repeat(3,1fr);gap:48px}
+  .panel{padding:32px 32px 28px}
+  .stages{grid-template-columns:repeat(3,1fr);gap:64px 48px;margin-top:64px}
+  .stages li{margin-left:0;padding:34px 0 0;border-left:0;border-top:1px solid var(--ink-line)}
+  .stages li:last-child{border-left-color:transparent}
+  .stages .n{left:0;top:-16px}
   .get .cols{grid-template-columns:1fr 1fr;gap:72px}
   section{padding:112px 0}
   .foot-in{flex-direction:row;justify-content:space-between;align-items:flex-start}
   .get .what{min-height:3.2em}
+  .why .figs{grid-template-columns:repeat(3,1fr);gap:48px}
+  .why .defs{grid-template-columns:1fr 1fr;gap:56px}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .stack i{animation:none}
+  .cells i{animation:none}
   html{scroll-behavior:auto}
   .btn{transition:none}
+  .btn-ghost{transition:none}
 }
 </style>
 </head>
@@ -174,7 +238,7 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
       <svg viewBox="0 0 23 20" role="img" aria-hidden="true"><use href="#mark"/></svg>
       <span>Flow Stack</span>
     </a>
-    <nav aria-label="Main"><a href="#contact">Get in touch</a></nav>
+    <nav aria-label="Main"><a href="#contact">Contact</a></nav>
   </div>
 </header>
 
@@ -186,48 +250,119 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
       <h1>When a buyer asks AI who to choose, does it name you?</h1>
       <p class="lead">I put the 30 questions your buyers ask to AI search and show you where you are named, who gets named instead, and which pages to fix. I work with software companies that serve commercial real estate.</p>
       <div class="actions">
-        <a class="btn" href="mailto:nadiv@flowstackautomations.com?subject=Free%20sample%20check">Ask for a free sample</a>
+        <a class="btn" href="#contact">Ask for a free sample</a>
         <a class="textlink" href="#what-you-get">See what you get</a>
       </div>
     </div>
 
     <aside class="panel" aria-labelledby="ex-title">
-      <h2 id="ex-title">One real audit: a commercial real estate software vendor</h2>
-      <div class="stacks">
-        <div>
-          <div class="stack" aria-hidden="true"><i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="on" style="--i:8"></i><i class="on" style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i></div>
-          <p class="stat"><b>10 of 30</b>questions where the AI named the company</p>
+      <p class="kicker">Sample audit, company name removed</p>
+      <h2 id="ex-title">Commercial real estate software vendor</h2>
+
+      <div class="meter">
+        <div class="meter-head">
+          <span class="meter-label">Company named in the answer</span>
+          <span class="meter-val">10<small>of 30</small></span>
         </div>
-        <div>
-          <div class="stack" aria-hidden="true"><i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="on" style="--i:8"></i><i class="on" style="--i:9"></i><i class="on" style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i></div>
-          <p class="stat"><b>11 of 30</b>questions where the AI linked to its own website</p>
-        </div>
+        <div class="cells" role="img" aria-label="Named in 10 of 30 questions"><i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="on" style="--i:8"></i><i class="on" style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i></div>
       </div>
-      <p class="note">Each bar is one of the 30 questions. Company name removed.</p>
+
+      <div class="meter">
+        <div class="meter-head">
+          <span class="meter-label">Own website linked</span>
+          <span class="meter-val">11<small>of 30</small></span>
+        </div>
+        <div class="cells" role="img" aria-label="Own website linked in 11 of 30 questions"><i class="on" style="--i:0"></i><i class="on" style="--i:1"></i><i class="on" style="--i:2"></i><i class="on" style="--i:3"></i><i class="on" style="--i:4"></i><i class="on" style="--i:5"></i><i class="on" style="--i:6"></i><i class="on" style="--i:7"></i><i class="on" style="--i:8"></i><i class="on" style="--i:9"></i><i class="on" style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i><i style="--i:14"></i><i style="--i:15"></i><i style="--i:16"></i><i style="--i:17"></i><i style="--i:18"></i><i style="--i:19"></i><i style="--i:20"></i><i style="--i:21"></i><i style="--i:22"></i><i style="--i:23"></i><i style="--i:24"></i><i style="--i:25"></i><i style="--i:26"></i><i style="--i:27"></i><i style="--i:28"></i><i style="--i:29"></i></div>
+      </div>
+
+      <div class="legend" aria-hidden="true">
+        <span><i class="on"></i>Yes</span>
+        <span><i></i>No</span>
+      </div>
+      <p class="note">A real audit run on 26 October 2026. Each cell is one of the 30 buyer questions put to OpenAI's search.</p>
     </aside>
   </div>
 </div>
 
-<section class="how" id="how">
+<section class="why" id="why">
   <div class="wrap">
-    <h2>How it works</h2>
-    <div class="cols">
+    <h2>Why being named by AI matters</h2>
+    <p class="sub">When a buyer asks an AI which software to use, it names a few companies and links to a few pages. If you are one of them, you are on the shortlist. If you are not, you are not in the conversation.</p>
+
+    <div class="figs">
       <div>
-        <span class="bar" aria-hidden="true"></span>
-        <h3>Ask</h3>
-        <p>I put your buyers' 30 questions to OpenAI's search, the way a buyer would. Each question is asked more than once, because AI answers change from one run to the next.</p>
+        <p class="fig-n">51%</p>
+        <p class="fig-t">of B2B buyers start their software research with an AI chatbot more often than with Google.</p>
       </div>
       <div>
-        <span class="bar" aria-hidden="true"></span>
-        <h3>Find the gaps</h3>
-        <p>For every question: were you named, who was named instead, and which sites were cited. The questions where you are missing show where to start.</p>
+        <p class="fig-n">54%</p>
+        <p class="fig-t">say AI chatbots influence which vendors make their shortlist, ahead of software review sites at 43%.</p>
       </div>
       <div>
-        <span class="bar" aria-hidden="true"></span>
-        <h3>Fix the pages</h3>
-        <p>You get answer-page briefs your team can publish, a checklist for your developer, and notes on the outside sites the AI trusts.</p>
+        <p class="fig-n">69%</p>
+        <p class="fig-t">say an AI chatbot led them to choose a different vendor than they first planned.</p>
       </div>
     </div>
+
+    <p class="opening">A third of buyers bought from a vendor they had never heard of before. That is the opening for smaller software companies.</p>
+
+    <div class="defs">
+      <div>
+        <h3>Named</h3>
+        <p>The AI recommends your company by name in its answer. That puts you on the buyer's shortlist.</p>
+      </div>
+      <div>
+        <h3>Cited</h3>
+        <p>The AI links to your page as the source of what it says. The buyer lands on your site and reads your words.</p>
+      </div>
+    </div>
+
+    <p class="src">Source: <a href="https://learn.g2.com/g2-2026-ai-search-insight-report" rel="noopener">G2, The Answer Economy: 2026 AI Search Insight Report</a>, a survey of 1,076 B2B decision makers, March 2026. G2 is a software review company, so read these as survey results, not a promise for any one company. On the quality of AI traffic: <a href="https://ahrefs.com/blog/ai-search-traffic-conversions-ahrefs/" rel="noopener">Ahrefs reported</a> that AI search sent about 0.5% of its own visitors but 12.1% of its signups in a 30-day window in June 2025. That is one company's numbers.</p>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h2>How the audit works</h2>
+    <p class="sub">Six stages, from your buyers' questions to pages your team can publish.</p>
+    <ol class="stages">
+      <li>
+        <span class="n" aria-hidden="true">1</span>
+        <h3>Build the question set</h3>
+        <p>I write 30 questions the way your buyers ask them: by product category, by need, and against the competitors you are compared with.</p>
+        <p class="out"><b>Produces</b>30 buyer questions</p>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true">2</span>
+        <h3>Run them on live AI search</h3>
+        <p>Every question goes to OpenAI's search. Each one runs more than once, because answers change from one run to the next.</p>
+        <p class="out"><b>Produces</b>Every answer, saved in full</p>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true">3</span>
+        <h3>Read every answer</h3>
+        <p>Each answer is checked for your company, for each competitor, and for whether the AI recommends you or only mentions you.</p>
+        <p class="out"><b>Produces</b>Named and recommended flags per answer</p>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true">4</span>
+        <h3>Map the sources</h3>
+        <p>Every link the AI cites is sorted by site: yours, a competitor's, or someone else's. Repeated runs show which sites it cites every time.</p>
+        <p class="out"><b>Produces</b>The sites the AI cites most</p>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true">5</span>
+        <h3>Find the gaps</h3>
+        <p>Questions where you are missing are grouped as open ground, mostly open or competitive, and flagged where your own site is already cited.</p>
+        <p class="out"><b>Produces</b>A priority list of where to act first</p>
+      </li>
+      <li>
+        <span class="n" aria-hidden="true">6</span>
+        <h3>Write the fixes</h3>
+        <p>A baseline report, then for up to 8 questions where you are missing: an answer-page brief, a developer checklist, notes on cited sites, review-profile steps and outreach drafts.</p>
+        <p class="out"><b>Produces</b>Pages and fixes your team can publish</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -264,9 +399,37 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
 <section class="promise" id="promise">
   <div class="wrap">
     <div class="inner">
-      <h2>What I can and can't promise</h2>
-      <p class="big">The goal is to get you cited by AI search. I can't control what the AI says, so I don't promise it. What I do is find exactly why you are missing and give you the pages and fixes that give you the best chance.</p>
-      <p class="scope">What I measure is OpenAI's search. That is not the ChatGPT app, Google's AI Overviews or other engines, which can answer differently.</p>
+      <h2>Why I don't guarantee rankings</h2>
+      <p class="big">Anyone who guarantees AI results is guessing. AI answers change from one run to the next, and nobody controls them.</p>
+      <p class="mid">So I don't promise results. The goal is to get you cited by AI search. What I do is find exactly why you are missing and give you the pages and fixes that give you the best chance.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2>Questions</h2>
+    <div class="faq-list">
+      <details>
+        <summary>Who is this for?</summary>
+        <p>Small and mid-sized software companies that serve commercial real estate.</p>
+      </details>
+      <details>
+        <summary>What do you need from me?</summary>
+        <p>Your website, your main competitors and the product names you want checked. That is enough to start.</p>
+      </details>
+      <details>
+        <summary>Do I need a developer?</summary>
+        <p>The action pack includes a short checklist for your developer, once. Your own team publishes the pages from my briefs.</p>
+      </details>
+      <details>
+        <summary>Which AI do you check?</summary>
+        <p>OpenAI's search, which answers with live web sources.</p>
+      </details>
+      <details>
+        <summary>Is the sample really free?</summary>
+        <p>Yes. Send your company's name and website, and I will run a free sample and email you what I find.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -277,6 +440,7 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
     <p class="sub">Send me your company's name and website. I'll run a free sample and email you what I find.</p>
     <div class="actions">
       <a class="btn" href="mailto:nadiv@flowstackautomations.com?subject=Free%20sample%20check">Email nadiv@flowstackautomations.com</a>
+      <button class="btn-ghost" type="button" id="copy-email" data-copy="nadiv@flowstackautomations.com" hidden>Copy address</button>
     </div>
   </div>
 </section>
@@ -297,6 +461,42 @@ section h2{font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:-0.04em}
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy-email");
+  if (!btn) return;
+  btn.hidden = false;
+  var original = btn.textContent;
+  var timer;
+  function done(ok) {
+    btn.textContent = ok ? "Copied" : "Press Ctrl+C to copy";
+    clearTimeout(timer);
+    timer = setTimeout(function () { btn.textContent = original; }, 2200);
+  }
+  function fallback(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    done(ok);
+  }
+  btn.addEventListener("click", function () {
+    var text = btn.getAttribute("data-copy");
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { fallback(text); });
+    } else {
+      fallback(text);
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
